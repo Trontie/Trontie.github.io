@@ -40,3 +40,58 @@
         target: "#sideNav",
     });
 })(jQuery); // End of use strict
+
+
+
+$( document ).ready(function() {
+  //Se carico la pagina e non sono all'inizio, ci torno.
+  if($(this).scrollTop() != 0) {
+    $("html, body").animate(
+        {
+            scrollTop: 0,
+        },
+        1000,
+        "easeInOutExpo"
+    );
+  }
+});
+
+  //Colora la navbar in base a dove mi trovo
+$(function(){
+  var abt = $('#about');
+  //var int = $('#interests');
+  var edu = $('#education');
+ // var sks = $('#skills');
+  var awa = $('#awards');
+
+  var abtOff = abt.offset().top;
+//  var intOff = int.offset().top;
+  var eduOff = edu.offset().top;
+  //var sksOff = sks.offset().top;
+  var awaOff = awa.offset().top;
+
+  $(window).scroll(function(){
+    var aTop = abt.height() + abtOff;
+   // var iTop = int.height() + intOff;
+    var eTop = edu.height() + eduOff;
+ //   var sTop = sks.height() + sksOff;
+    var awaTop = awa.height() + awaOff;
+
+    var scroll = $(this).scrollTop();
+/*
+    console.log("atop: " + aTop);
+    console.log("eTop: " + eTop);
+    console.log("sTop: " + sTop);
+    console.log("iTop: " + iTop);
+    console.log("awaTop: " + awaTop);
+    console.log(scroll);
+*/
+    if(scroll <= aTop)
+      $('#sideNav').removeClass().addClass("navbar navbar-expand-lg navbar-dark fixed-top bg-warning");
+    if (scroll > aTop && scroll <= eTop)
+      $('#sideNav').removeClass().addClass("navbar navbar-expand-lg navbar-dark fixed-top bg-success");
+    if (scroll > aTop && scroll > eTop && scroll <= awaTop)
+      $('#sideNav').removeClass().addClass("navbar navbar-expand-lg navbar-dark fixed-top bg-danger");
+
+  });
+});
